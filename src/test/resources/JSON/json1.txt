@@ -1,0 +1,11 @@
+{"json1": {
+  "id": "id1",
+  "value": "value1",
+  "tree1": {
+    "array1": [
+      {"value": "value1", "parameter1": "test1"},
+      {"value": "value2", "parameter2": "test2"},
+      {"value": "value3", "parameter3": "test3"}
+    ]
+  }
+}}

@@ -1,0 +1,54 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<artifactId>java.http</artifactId>
+	<packaging>jar</packaging>
+
+	<name>Java HTTP Client</name>
+
+	<version>1.0.0</version>
+
+	<description>HTTP/HTTPS client which support sync and async requests</description>
+
+	<url>https://github.com/etuzon/Java-HTTP-Client</url>
+
+	 <scm>
+        <url>https://github.com/etuzon/Java-HTTP-Client</url>
+        <connection>https://github.com/etuzon/Java-HTTP-Client.git</connection>
+    </scm>
+
+	<licenses>
+		<license>
+			<name>Apache License, Version 2.0</name>
+			<url>https://www.apache.org/licenses/LICENSE-2.0.txt</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+
+	<parent>
+		<groupId>io.github.etuzon</groupId>
+		<artifactId>java.base.pom</artifactId>
+		<version>1.0.14-base</version>
+	</parent>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<maven.compiler.source>1.8</maven.compiler.source>
+		<maven.compiler.target>1.8</maven.compiler.target>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>io.github.etuzon</groupId>
+			<artifactId>java.projects.core</artifactId>
+			<version>1.0.13</version>
+		</dependency>
+		<dependency>
+			<groupId>org.apache.httpcomponents.client5</groupId>
+			<artifactId>httpclient5</artifactId>
+			<version>5.0-beta4</version>
+		</dependency>
+	</dependencies>
+</project>
