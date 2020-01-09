@@ -5,7 +5,6 @@ import io.github.etuzon.unit.tests.base.BaseUnitTest;
 import io.github.etuzon.unit.tests.exceptions.AutomationUnitTestException;
 
 public class HttpClientTestBase extends BaseUnitTest {
-
 	protected HttpClient initHttpClient(String url) throws AutomationUnitTestException {
 		try {
 			return new HttpClient(url);
@@ -14,7 +13,15 @@ public class HttpClientTestBase extends BaseUnitTest {
 		}
 	}
 	
-	protected HttpClient initHttpClient(String url, String username, String password) throws AutomationUnitTestException {
+	protected HttpClient initHttpClient(String url, int port) throws AutomationUnitTestException {
+		try {
+			return new HttpClient(url, port);
+		} catch (Exception e) {
+			throw new AutomationUnitTestException(e);
+		}
+	}
+	
+	protected HttpClient initHttpClient(String url, int port, String username, String password) throws AutomationUnitTestException {
 		try {
 			return new HttpClient(url, username, password);
 		} catch (Exception e) {
@@ -22,7 +29,7 @@ public class HttpClientTestBase extends BaseUnitTest {
 		}
 	}
 	
-	protected HttpClient initHttpClient(String url, String jSessionId) throws AutomationUnitTestException {
+	protected HttpClient initHttpClient(String url, int port, String jSessionId) throws AutomationUnitTestException {
 		try {
 			return new HttpClient(url, jSessionId);
 		} catch (Exception e) {

@@ -43,7 +43,7 @@ public class HttpAsyncClientTest extends HttpClientTestBase implements TestParam
 
 	@Test
 	public void send_aSync_GET_request_test() throws AutomationUnitTestException {
-		HttpClient httpClient = initHttpClient(HTTP_ADDRESS);
+		HttpClient httpClient = initHttpClient(HTTP_ADDRESS, HttpClient.HTTP_PORT);
 
 		HttpAsyncClient asyncHttpClient = null;
 
@@ -55,21 +55,6 @@ public class HttpAsyncClientTest extends HttpClientTestBase implements TestParam
 
 		verifyAsyncGetResponse(asyncHttpClient);
 	}
-
-/*	@Test
-	public void send_aSync_GET_request_test() throws AutomationUnitTestException {
-		HttpClient httpClient = initHttpClient(HTTPS_ADDRESS_1);
-
-		HttpAsyncClient asyncHttpClient = null;
-
-		try {
-			asyncHttpClient = httpClient.sendAsyncGet();
-		} catch (HttpException | InvalidHttpRequestException e) {
-			throw new AutomationUnitTestException(e);
-		}
-
-		verifyAsyncGetResponse(asyncHttpClient);
-	}*/
 	
 	@Test
 	public void send_aSync_POST_request_test() throws AutomationUnitTestException {
@@ -77,7 +62,7 @@ public class HttpAsyncClientTest extends HttpClientTestBase implements TestParam
 		try {
 			initTcpServer();
 
-			HttpClient httpClient = initHttpClient("http://127.0.0.1:" + TCP_SERVER_PORT);
+			HttpClient httpClient = initHttpClient("http://127.0.0.1", TCP_SERVER_PORT);
 
 			httpAsync = sendAsyncHttpPostAndVerifyServerGetPostEntity(httpClient, POST_ENTITY,
 					TIMEOUT_UNTIL_HTTP_SERVER_GET_REQUEST_BODY);

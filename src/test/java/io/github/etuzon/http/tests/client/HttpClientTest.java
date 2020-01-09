@@ -78,7 +78,7 @@ public class HttpClientTest extends HttpClientTestBase implements TestParameters
 
 	@Test
 	public void send_GET_request_test() throws AutomationUnitTestException {
-		HttpClient httpClient = initHttpClient(HTTP_ADDRESS);
+		HttpClient httpClient = initHttpClient(HTTP_ADDRESS, HttpClient.HTTP_PORT);
 
 		HttpObject httpObject = null;
 
@@ -94,7 +94,7 @@ public class HttpClientTest extends HttpClientTestBase implements TestParameters
 
 	@Test
 	public void send_POST_request_test() throws AutomationUnitTestException {
-		HttpClient httpClient = initHttpClient(HTTP_ADDRESS);
+		HttpClient httpClient = initHttpClient(HTTP_ADDRESS, HttpClient.HTTP_PORT);
 
 		HttpObject httpObject = null;
 
@@ -110,7 +110,7 @@ public class HttpClientTest extends HttpClientTestBase implements TestParameters
 
 	@Test
 	public void send_DEL_request_test() throws AutomationUnitTestException {
-		HttpClient httpClient = initHttpClient(HTTP_ADDRESS);
+		HttpClient httpClient = initHttpClient(HTTP_ADDRESS, HttpClient.HTTP_PORT);
 
 		HttpObject httpObject = null;
 
@@ -147,7 +147,7 @@ public class HttpClientTest extends HttpClientTestBase implements TestParameters
 		HttpObject httpObject = null;
 
 		try {
-			httpObject = httpClient.sendGet();
+			httpObject = httpClient.sendGet("get");
 		} catch (HttpException | InvalidHttpRequestException e) {
 			throw new AutomationUnitTestException(e);
 		}
@@ -158,7 +158,7 @@ public class HttpClientTest extends HttpClientTestBase implements TestParameters
 
 	@Test
 	public void send_GET_with_basic_authentication_request_test() throws AutomationUnitTestException {
-		HttpClient httpClient = initHttpClient(HTTP_ADDRESS, USERNAME, PASSWORD);
+		HttpClient httpClient = initHttpClient(HTTP_ADDRESS, HttpClient.HTTP_PORT, USERNAME, PASSWORD);
 
 		HttpObject httpObject = null;
 
@@ -174,7 +174,7 @@ public class HttpClientTest extends HttpClientTestBase implements TestParameters
 
 	@Test
 	public void send_GET_with_J_SESSION_ID_cookie_request_test() throws AutomationUnitTestException {
-		HttpClient httpClient = initHttpClient(HTTP_ADDRESS, J_SESSION_ID);
+		HttpClient httpClient = initHttpClient(HTTP_ADDRESS, HttpClient.HTTP_PORT, J_SESSION_ID);
 
 		HttpObject httpObject = null;
 

@@ -14,6 +14,7 @@ import org.apache.hc.core5.http.Header;
 import org.apache.hc.core5.http.io.entity.StringEntity;
 import org.apache.hc.core5.http.message.BasicHeader;
 
+import io.github.etuzon.http.client.HttpClient;
 import io.github.etuzon.http.enums.HeaderEnum;
 import io.github.etuzon.http.enums.RequestTypeEnum;
 import io.github.etuzon.http.exceptions.InvalidHttpRequestException;
@@ -77,7 +78,7 @@ public class RequestBuilder {
 	 * @param requestType Request type.
 	 */
 	public RequestBuilder(String baseUrl, int port, RequestTypeEnum requestType) {
-		if ((port != 80) && (port != 443)) {
+		if ((port != HttpClient.HTTP_PORT) && (port != HttpClient.HTTPS_PORT)) {
 			baseUrl += ":" + port;
 		}
 

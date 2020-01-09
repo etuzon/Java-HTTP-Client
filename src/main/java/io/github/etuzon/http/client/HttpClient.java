@@ -32,6 +32,9 @@ import io.github.etuzon.projects.core.utils.StringUtil;
  *
  */
 public class HttpClient {
+	public static final int HTTP_PORT = 80;
+	public static final int HTTPS_PORT = 443;
+
 	public static final boolean RELEASE_CONNECTION = true;
 	public static final boolean NOT_RELEASE_CONNECTION = false;
 
@@ -47,7 +50,19 @@ public class HttpClient {
 	 * @throws HttpException               in case failed to init HTTP client.
 	 */
 	public HttpClient(String baseUrl) throws InvalidHttpRequestException, HttpException {
-		this(baseUrl, null, null);
+		this(baseUrl, -1);
+	}
+
+	/*******************************************
+	 * Constructor.
+	 * 
+	 * @param baseUrl Basic URL not include port and URL suffix.
+	 * @param port Port.
+	 * @throws InvalidHttpRequestException in case HTTP request is invalid.
+	 * @throws HttpException               in case failed to init HTTP client.
+	 */
+	public HttpClient(String baseUrl, int port) throws InvalidHttpRequestException, HttpException {
+		this(baseUrl, null, null, port);
 	}
 
 	/*******************************************
@@ -59,7 +74,20 @@ public class HttpClient {
 	 * @throws HttpException               in case failed to init HTTP client.
 	 */
 	public HttpClient(String baseUrl, String jSessionId) throws InvalidHttpRequestException, HttpException {
-		this(baseUrl, null, null);
+		this(baseUrl, jSessionId, -1);
+	}
+
+	/*******************************************
+	 * Constructor.
+	 * 
+	 * @param baseUrl    Basic URL not include port and URL suffix.
+	 * @param jSessionId JESSIONID.
+	 * @param port Port.
+	 * @throws InvalidHttpRequestException in case HTTP request is invalid.
+	 * @throws HttpException               in case failed to init HTTP client.
+	 */
+	public HttpClient(String baseUrl, String jSessionId, int port) throws InvalidHttpRequestException, HttpException {
+		this(baseUrl, null, null, port);
 		requestBuilder.setJSessionId(jSessionId);
 	}
 
@@ -74,10 +102,29 @@ public class HttpClient {
 	 */
 	public HttpClient(String baseUrl, String username, String password)
 			throws InvalidHttpRequestException, HttpException {
+		this(baseUrl, username, password, -1);
+	}
+
+	/*******************************************
+	 * Constructor.
+	 * 
+	 * @param baseUrl  Basic URL not include port and URL suffix.
+	 * @param username Username.
+	 * @param password Password.
+	 * @param port     Port.
+	 * @throws InvalidHttpRequestException in case HTTP request is invalid.
+	 * @throws HttpException               in case failed to init HTTP client.
+	 */
+	public HttpClient(String baseUrl, String username, String password, int port)
+			throws InvalidHttpRequestException, HttpException {
 		this.baseUrl = baseUrl;
 
-		requestBuilder = new RequestBuilder(baseUrl);
+		if (port != -1) {
+			requestBuilder = new RequestBuilder(baseUrl, port);
+		} else {
+			requestBuilder = new RequestBuilder(baseUrl);
 
+		}
 		if ((username != null) && (password != null)) {
 			requestBuilder.setCredentials(username, password);
 		}
@@ -292,52 +339,53 @@ public class HttpClient {
 	 * Sent PUT request.
 	 * 
 	 * @return HttpObject which contains request and response.
-	 * @throws HttpException in case failed send HTTP request.
+	 * @throws HttpException               in case failed send HTTP request.
 	 * @throws InvalidHttpRequestException in case HTTP request is invalid.
 	 */
 	public HttpObject sendPut() throws HttpException, InvalidHttpRequestException {
 		return sendPut("");
 	}
-	
+
 	/*******************************************
 	 * Sent PUT request.
 	 * 
 	 * @param suffixUrl Sent PUT request.
 	 * @return HttpObject which contains request and response.
-	 * @throws HttpException in case failed send HTTP request.
+	 * @throws HttpException               in case failed send HTTP request.
 	 * @throws InvalidHttpRequestException in case HTTP request is invalid.
 	 */
 	public HttpObject sendPut(String suffixUrl) throws HttpException, InvalidHttpRequestException {
 		return sendPut(suffixUrl, "");
 	}
-	
+
 	/*******************************************
 	 * Sent PUT request.
 	 * 
 	 * @param suffixUrl Sent PUT request.
-	 * @param entity Body of request.
+	 * @param entity    Body of request.
 	 * @return HttpObject which contains request and response.
-	 * @throws HttpException in case failed send HTTP request.
+	 * @throws HttpException               in case failed send HTTP request.
 	 * @throws InvalidHttpRequestException in case HTTP request is invalid.
 	 */
 	public HttpObject sendPut(String suffixUrl, String entity) throws HttpException, InvalidHttpRequestException {
 		return sendPut(suffixUrl, null, entity);
 	}
-	
+
 	/*******************************************
 	 * Sent PUT request.
 	 * 
-	 * @param suffixUrl URL suffix.
+	 * @param suffixUrl  URL suffix.
 	 * @param headerList List of headers.
-	 * @param entity Body of request.
+	 * @param entity     Body of request.
 	 * @return HttpObject which contains request and response.
-	 * @throws HttpException in case failed send HTTP request.
+	 * @throws HttpException               in case failed send HTTP request.
 	 * @throws InvalidHttpRequestException in case HTTP request is invalid.
 	 */
-	public HttpObject sendPut(String suffixUrl, List<BasicHeader> headerList, String entity) throws HttpException, InvalidHttpRequestException {
+	public HttpObject sendPut(String suffixUrl, List<BasicHeader> headerList, String entity)
+			throws HttpException, InvalidHttpRequestException {
 		return sendPut(suffixUrl, headerList, entity, RELEASE_CONNECTION);
 	}
-	
+
 	/*******************************************
 	 * Sent PUT request.
 	 * 
