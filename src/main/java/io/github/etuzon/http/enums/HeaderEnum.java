@@ -1,7 +1,7 @@
 package io.github.etuzon.http.enums;
 
 public enum HeaderEnum {
-	AUTORIZATION("Authorization"), CONNECTION("Connection"), CONTENT_LENGTH("Content-Length"),
+	ACCEPT("Accept"), AUTORIZATION("Authorization"), CONNECTION("Connection"), CONTENT_LENGTH("Content-Length"),
 	CONTENT_TYPE("Content-Type"), COOKIE("Cookie");
 
 	private final String name;
